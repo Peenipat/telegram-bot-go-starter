@@ -17,7 +17,17 @@ func (ctl *TelegramController) HandleWebhook(c *fiber.Ctx) error {
 	return ctl.Service.ProcessWebhook(c)
 }
 
-
+// HandleSendMessage godoc
+// @Summary Send message to Telegram user
+// @Description Sends a message via Telegram Bot API to the specified chat ID
+// @Tags Telegram
+// @Accept json
+// @Produce json
+// @Param message body Interface.TelegramSendRequest true "Message payload"
+// @Success 200 {object} map[string]interface{} "Message sent"
+// @Failure 400 {object} map[string]string "Invalid input"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /telegram/send [post]
 func (ctl *TelegramController) HandleSendMessage(c *fiber.Ctx) error {
 	var req Interface.TelegramSendRequest
 	if err := c.BodyParser(&req); err != nil {

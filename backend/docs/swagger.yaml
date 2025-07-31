@@ -1,0 +1,52 @@
+basePath: /api/v1
+definitions:
+  telegramInterface.TelegramSendRequest:
+    properties:
+      chat_id:
+        type: integer
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a Telegram Bot API server
+  title: Telegram Bot API
+  version: "1.0"
+paths:
+  /telegram/send:
+    post:
+      consumes:
+      - application/json
+      description: Sends a message via Telegram Bot API to the specified chat ID
+      parameters:
+      - description: Message payload
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/telegramInterface.TelegramSendRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message sent
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Send message to Telegram user
+      tags:
+      - Telegram
+swagger: "2.0"

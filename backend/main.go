@@ -1,3 +1,8 @@
+// @title Telegram Bot API
+// @version 1.0
+// @description This is a Telegram Bot API server
+// @host localhost:8080
+// @BasePath /api/v1
 package main
 
 import (
@@ -5,6 +10,8 @@ import (
 
 	configDB "github.com/Peenipat/telegram-bot-go-starter/backend/config"
 	controller "github.com/Peenipat/telegram-bot-go-starter/backend/controller"
+	swagger "github.com/swaggo/fiber-swagger"        
+	_ "github.com/Peenipat/telegram-bot-go-starter/backend/docs" 
 	"github.com/Peenipat/telegram-bot-go-starter/backend/router"
 	"github.com/Peenipat/telegram-bot-go-starter/backend/service"
 	"github.com/gofiber/fiber/v2"
@@ -43,6 +50,8 @@ func main(){
 	telegramController := controller.NewTelegramController(telegramService)
 	apiGroup := app.Group("/api/v1/")
 	router.RegisterTelegramRoutes(apiGroup, telegramController)
+	
+	app.Get("/swagger/*", swagger.WrapHandler)
 
 	// Start server
 	port := configDB.AppConfig.Port
