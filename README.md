@@ -1,5 +1,5 @@
 # telegram-bot-go-starter
-
+[อ่านคู่มือภาษาไทย](https://medium.com/@nipatchapakdee/สร้าง-telegram-bot-ด้วย-go-สำหรับมือใหม่-cbdf4625c780)
 Starter project for building a Telegram Bot using Go, PostgreSQL, and Docker Compose.
 
 > Designed for beginners who want to quickly start building and deploying a Telegram bot connected to a PostgreSQL database.
