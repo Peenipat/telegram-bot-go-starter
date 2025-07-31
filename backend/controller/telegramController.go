@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	Interface "github.com/Peenipat/telegram-bot-go-starter/backend/interface"
+	Interface "github.com/Peenipat/telegram-bot-go-starter/interface"
 )
 
 type TelegramController struct {

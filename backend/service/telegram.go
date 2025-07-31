@@ -1,7 +1,7 @@
 package service
 
 import (
-	model "github.com/Peenipat/telegram-bot-go-starter/backend/model"
+	model "github.com/Peenipat/telegram-bot-go-starter/model"
 	"bytes"
 	"encoding/json"
 	"fmt"

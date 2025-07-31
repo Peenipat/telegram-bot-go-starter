@@ -8,12 +8,12 @@ package main
 import (
 	"log"
 
-	configDB "github.com/Peenipat/telegram-bot-go-starter/backend/config"
-	controller "github.com/Peenipat/telegram-bot-go-starter/backend/controller"
+	configDB "github.com/Peenipat/telegram-bot-go-starter/config"
+	controller "github.com/Peenipat/telegram-bot-go-starter/controller"
 	swagger "github.com/swaggo/fiber-swagger"        
-	_ "github.com/Peenipat/telegram-bot-go-starter/backend/docs" 
-	"github.com/Peenipat/telegram-bot-go-starter/backend/router"
-	"github.com/Peenipat/telegram-bot-go-starter/backend/service"
+	_ "github.com/Peenipat/telegram-bot-go-starter/docs" 
+	"github.com/Peenipat/telegram-bot-go-starter/router"
+	"github.com/Peenipat/telegram-bot-go-starter/service"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -50,7 +50,7 @@ func main(){
 	telegramController := controller.NewTelegramController(telegramService)
 	apiGroup := app.Group("/api/v1/")
 	router.RegisterTelegramRoutes(apiGroup, telegramController)
-	
+
 	app.Get("/swagger/*", swagger.WrapHandler)
 
 	// Start server

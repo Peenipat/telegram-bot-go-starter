@@ -3,7 +3,7 @@ package router
 import (
     "github.com/gofiber/fiber/v2"
 
-    controller "github.com/Peenipat/telegram-bot-go-starter/backend/controller"
+    controller "github.com/Peenipat/telegram-bot-go-starter/controller"
 )
 
 func RegisterTelegramRoutes(router fiber.Router, ctrl *controller.TelegramController) {
