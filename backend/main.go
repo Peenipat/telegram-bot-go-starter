@@ -10,6 +10,7 @@ import (
 
 	configDB "github.com/Peenipat/telegram-bot-go-starter/config"
 	controller "github.com/Peenipat/telegram-bot-go-starter/controller"
+	model  "github.com/Peenipat/telegram-bot-go-starter/model"
 	swagger "github.com/swaggo/fiber-swagger"        
 	_ "github.com/Peenipat/telegram-bot-go-starter/docs" 
 	"github.com/Peenipat/telegram-bot-go-starter/router"
@@ -21,18 +22,31 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
-func main(){
-	// Load environment config
+func main() {
 	configDB.LoadConfig()
+	
 
-	// Connect to database
 	configDB.ConnectDB()
 	if configDB.DB == nil {
 		log.Fatal("GORM DB is nil. Cannot proceed.")
 	}
 
-	// Initialize Fiber
+	configDB.RunMigrations()
+	configDB.SeedData()
+
 	app := fiber.New()
+
+	if err := configDB.DB.AutoMigrate(
+		&model.MenuItem{},
+		&model.Order{},
+		&model.OrderItem{},
+		&model.Reservation{},
+		&model.Feedback{},
+		&model.Ingredient{},
+		&model.StockMovement{},
+	); err != nil {
+		log.Fatalf("AutoMigrate failed: %v", err)
+	}
 
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
@@ -45,7 +59,6 @@ func main(){
 	app.Use(helmet.New())
 	app.Use(compress.New())
 
-	// Routes
 	telegramService := service.NewTelegramService()
 	telegramController := controller.NewTelegramController(telegramService)
 	apiGroup := app.Group("/api/v1/")
@@ -53,11 +66,10 @@ func main(){
 
 	app.Get("/swagger/*", swagger.WrapHandler)
 
-	// Start server
 	port := configDB.AppConfig.Port
 	if port == "" {
 		port = "8080"
 	}
-	log.Printf("🚀 Server running on port %s", port)
+	log.Printf("Server running on port %s", port)
 	log.Fatal(app.Listen(":" + port))
 }

@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS stock_movements;
+DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS feedbacks;
+DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS menu_items;
