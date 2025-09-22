@@ -1,5 +1,5 @@
 # telegram-bot-go-starter
-[อ่านคู่มือภาษาไทย](https://medium.com/@nipatchapakdee/สร้าง-telegram-bot-ด้วย-go-สำหรับมือใหม่-cbdf4625c780)
+[อ่านคู่มือภาษาไทย](https://medium.com/@nipatchapakdee/สร้าง-react-component-แผนที่ประเทศไทยด้วย-react-simple-maps-995c9bb2c0c4)
 
 Starter project for building a Telegram Bot using Go, PostgreSQL, and Docker Compose.
 
